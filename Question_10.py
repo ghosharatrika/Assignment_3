@@ -23,8 +23,8 @@ xmax = 20.0
 n = 256
 dx = (xmax - xmin) / n
 dy = dx
-x = np.linspace(xmin, xmax, n)
-y = np.linspace(xmin, xmax, n)  # x and y have the same range from (-20,20)
+x = np.linspace(xmin, xmax, n, endpoint=False)
+y = np.linspace(xmin, xmax, n, endpoint=False)  # x and y have the same range from (-20,20)
 X, Y = np.meshgrid(x, y)
 
 # Computing the Gaussian function values on the grid
