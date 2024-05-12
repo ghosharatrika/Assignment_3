@@ -1,7 +1,6 @@
 /*
-   This code uses FFTW to calculate the fourier transform of 
-   gaussian function and plots it along with the analytical 
-   fourier transformed function
+   This code uses FFTW to calculate the fourier transform of gaussian function 
+   and plots it along with the analytical fourier transformed function
 */
 
 #include <stdio.h>
@@ -19,7 +18,7 @@ double gaussian(double x){
 
 // Defining the analytical fourier transform of gaussian function
 double analytical_ft(double k, double PI){
-    return sqrt(0.5)* exp(-PI*PI*k*k);
+    return sqrt(0.5)* exp(-k*k/4.0);
 }
 
 int main() {
@@ -76,8 +75,9 @@ int main() {
         }
         // Calculating the properly such that the FFT is correctly normalized
         factor = delta_x * sqrt(1.0/(2*PI)) * creal(cexp(I*k[i]*2*PI*xmin));
-        fprintf(output_file, "%f %f\n", k[i], fabs(factor * out[i][0]));
-        fprintf(output_file2, "%f %f\n", k[i], analytical_ft(k[i],PI));
+        // Multiplying k by 2*pi to convert to angular frequency
+        fprintf(output_file, "%f %f\n", 2*PI*k[i], fabs(factor * out[i][0]));
+        fprintf(output_file2, "%f %f\n", 2*PI*k[i], analytical_ft(2*PI*k[i],PI));
     }
     fclose(output_file);
     fclose(output_file2);
