@@ -48,8 +48,8 @@ convolution_analytical = analytical_convolution(x)
 convolution_dft = convolve_via_dft(f, g) * dx
 
 # Plottting the results
-plt.plot(x, f[:N], label='f(x) = exp(-$x^2$)')
-plt.plot(x, g[:N], label='g(x) = exp(-$4x^2$)')
+plt.plot(x, gaussian1(x), label='$f(x) = e^{-x^2}$')
+plt.plot(x, gaussian2(x), label='$g(x) = e^{-4x^2}$')
 plt.plot(x, convolution_analytical, label='Analytical Convolution')
 plt.plot(x, convolution_dft[N//2:3*N//2], '--', label='Convolution via DFT')
 plt.xlabel('x')
