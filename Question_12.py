@@ -35,7 +35,7 @@ xmin = -5.0
 xmax = 5.0
 N = 500
 dx = (xmax - xmin) / N
-x = np.linspace(xmin, xmax, N)
+x = np.linspace(xmin, xmax, N, endpoint=False)  # Excluding endpoint to avoid redundancy
 
 # Zero padding
 f = np.pad(gaussian1(x), (0, N), mode='constant', constant_values=(0, 0))
