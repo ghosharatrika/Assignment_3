@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 j = complex(0, 1)
 
 
-# Function to calculate DFT of n numbers using direct formula
 def direct_dft(num):
     n = len(num)
     p = np.arange(n)
@@ -30,7 +29,7 @@ def measure_time(n_values):
     direct_dft_times = []
     numpy_fft_times = []
     for n in n_values:
-        numbers = 2.5 * np.arange(n)
+        numbers = np.random.rand(n)  # Random number generator is used to generate n numbers
         start_time = time.time()
         direct_dft(numbers)
 
@@ -45,12 +44,12 @@ def measure_time(n_values):
     return direct_dft_times, numpy_fft_times
 
 
-# Range of values for n from 4 to 100
+# Range of values for n
 n_values = range(4, 101)
 
 direct_dft_time, numpy_fft_time = measure_time(n_values)
 
-# Plotting the result
+# Plotting
 plt.plot(n_values, direct_dft_time, label='Direct DFT')
 plt.plot(n_values, numpy_fft_time, label='Numpy FFT')
 plt.xlabel('Number of elements (n)')
