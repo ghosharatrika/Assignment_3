@@ -25,7 +25,7 @@ xmin = -4.0
 xmax = 4.0
 N = 256
 dx = (xmax - xmin) / N
-x = np.arange(xmin, xmax, dx)
+x = np.linspace(xmin, xmax, N, endpoint=False)  # Excluding endpoint to avoid redundancy
 
 # Zero padding
 box1 = np.pad(box_function(x), (0, N), mode='constant', constant_values=(0, 0))
