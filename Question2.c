@@ -23,7 +23,7 @@ double sinc(double x){
 
 // Defining the analytical fourier transform of sinc function
 double analytical_ft(double k, double pi){
-    if(k<=1.0/(2*pi) && k>=-1.0/(2*pi)){
+    if(k<=1.0 && k>=-1.0){
        return sqrt(pi/2);
     }
     else{
@@ -63,7 +63,6 @@ int main() {
     // FFTW returns the fourier transform without any prefactor of 1/sqrt(n)
     
     fftw_execute(p); // Executing FFT
-    // FFT obtained is not normalized
     
     FILE *output_file = fopen("box.dat", "w"); // Writing output to a file ''box.dat''
     FILE *output_file2 = fopen("box2.dat", "w"); // Writing analytical solution to a file ''box.2dat''
@@ -84,10 +83,11 @@ int main() {
         else {
             k[i] = -(N-i) / (N * delta_x);
         }
-        // Calculating the factor properly such that the FFT is correctly normalized
+        // Calculating the properly such that the FFT is correctly normalized
         factor = delta_x * sqrt(1.0/(2*PI)) * creal(cexp(I*k[i]*2*PI*xmin));
-        fprintf(output_file, "%f %f\n", k[i], fabs(factor * out[i][0]));
-        fprintf(output_file2, "%f %f\n", k[i], analytical_ft(k[i], PI));
+        // K are the frequencies and hence converting them to angular frequencies
+        fprintf(output_file, "%f %f\n", 2*PI*k[i], fabs(factor * out[i][0]));
+        fprintf(output_file2, "%f %f\n", 2*PI*k[i], analytical_ft(2*PI*k[i], PI));
     }
     fclose(output_file);
     fclose(output_file2);
